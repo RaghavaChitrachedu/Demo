@@ -2,18 +2,105 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HeyGen Assistant Embed</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HeyGen Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background-color: #f8f9fa;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    p {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .dashboard {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .chart-container {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+      width: 400px;
+    }
+
+    canvas {
+      max-width: 100%;
+    }
+  </style>
 </head>
 <body>
   <h1>Welcome to the Dashboard</h1>
   <p>This is a sample web page with HeyGen integrated.</p>
 
+  <div class="dashboard">
+    <div class="chart-container">
+      <h3>Sales by Category</h3>
+      <canvas id="barChart"></canvas>
+    </div>
+    <div class="chart-container">
+      <h3>Revenue Breakdown</h3>
+      <canvas id="donutChart"></canvas>
+    </div>
+  </div>
+
+  <script>
+    // Bar Chart
+    new Chart(document.getElementById('barChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Electronics', 'Clothing', 'Furniture', 'Other'],
+        datasets: [{
+          label: 'Sales',
+          data: [80, 50, 30, 20],
+          backgroundColor: '#3498db'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+
+    // Donut Chart
+    new Chart(document.getElementById('donutChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['North', 'South', 'East', 'West'],
+        datasets: [{
+          data: [30, 25, 25, 20],
+          backgroundColor: ['#1abc9c', '#2980b9', '#9b59b6', '#e67e22']
+        }]
+      },
+      options: {
+        responsive: true,
+        cutout: '60%'
+      }
+    });
+  </script>
+
   <!-- HEYGEN AVATAR SCRIPT -->
   <script>
     !function(window){
       const host = "https://labs.heygen.com",
-      url = host + "/guest/streaming-embed?share=eyJxdWFsaXR5IjoiaGlnaCIsImF2YXRhck5hbWUiOiJUaGFkZGV1c19Qcm9mZXNzaW9uYWxMb29r%0D%0AMl9wdWJsaWMiLCJwcmV2aWV3SW1nIjoiaHR0cHM6Ly9maWxlczIuaGV5Z2VuLmFpL2F2YXRhci92%0D%0AMy9jMGI1YjhhZWNlZmI0MWUyYmIyNTg5YmE1OGJlZTFhYl81NTk1MC9wcmV2aWV3X3RhbGtfMS53%0D%0AZWJwIiwibmVlZFJlbW92ZUJhY2tncm91bmQiOnRydWUsImtub3dsZWRnZUJhc2VJZCI6IjhlMTNj%0D%0AZGY1OGM0OTQ4ZWRiNDFmNjc2YmQ1NGRmNmUyIiwidXNlcm5hbWUiOiI3NDRhYjAzNzI5Nzk0NWY4%0D%0AYjNmNjc5MThhOWI5NWRiNiJ9&inIFrame=1",
+      url = host + "/guest/streaming-embed?share=eyJxdWFsaXR5IjoiaGlnaCIsImF2YXRhck5hbWUiOiJUaGFkZGV1c19Qcm9mZXNzaW9uYWxMb29r%0AMl9wdWJsaWMiLCJwcmV2aWV3SW1nIjoiaHR0cHM6Ly9maWxlczIuaGV5Z2VuLmFpL2F2YXRhci92%0AMy9jMGI1YjhhZWNlZmI0MWUyYmIyNTg5YmE1OGJlZTFhYl81NTk1MC9wcmV2aWV3X3RhbGtfMS53%0AZWJwIiwibmVlZFJlbW92ZUJhY2tncm91bmQiOnRydWUsImtub3dsZWRnZUJhc2VJZCI6IjhlMTNj%0AZGY1OGM0OTQ4ZWRiNDFmNjc2YmQ1NGRmNmUyIiwidXNlcm5hbWUiOiI3NDRhYjAzNzI5Nzk0NWY4%0AYjNmNjc5MThhOWI5NWRiNiJ9&inIFrame=1",
       clientWidth = document.body.clientWidth,
       wrapDiv = document.createElement("div");
 
